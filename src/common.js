@@ -223,14 +223,15 @@
 
       // Print blue portal
       var box_price = document.createElement("a-box");
-          box_price.setAttribute('dynamic-body','');
+          box_price.setAttribute('static-body','');
+          box_price.setAttribute('src','#door');
           box_price.setAttribute('id','price');
-          box_price.setAttribute('height',1);
-          box_price.setAttribute('width',1);
-          box_price.setAttribute('depth',1);
-          box_price.setAttribute('rotation','45 45 45');
+          box_price.setAttribute('height',3);
+          box_price.setAttribute('width',1.5);
+       //   box_price.setAttribute('depth',1);
+          box_price.setAttribute('rotation','0 0 0');
           box_price.setAttribute('position',(3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
-          box_price.setAttribute('color','#00f');
+       //   box_price.setAttribute('color','#00f');
 
           scene.appendChild(box_price);
 
