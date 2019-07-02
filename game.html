@@ -22,8 +22,9 @@
         <img src="assets/ground.jpg" id="asset_ground">
         <img src="assets/msg.jpg" id="asset_msg">
       </a-assets>
+    <a-entity sound="src: url(assets/backgroundnoise.mp3); autoplay: true; loop:true; distanceModel:linear"></a-entity>
       <a-entity static-body
-                sound="src: url(src/bat.mp3); on: collide"
+                sound="src: url(src/bat.mp3); on: collide; volume:0.2; refDistance: 0.5"
                 velocity="0 0 0" 
                 rotation="0 0 0" 
                 position="0 1.6 -2" 
