@@ -201,15 +201,31 @@
       cam.setAttribute('position',(3*(free2-(maze_width-1)*.5))+' 1.6 '+(3*(free1-(maze_height-1)*.5)));
 
       // Print instructions
-      var plane_instructions = document.createElement("a-plane");
+      var plane_instructions = document.createElement("a-box");
       plane_instructions.setAttribute('height',1.5);
       plane_instructions.setAttribute('width',3);
       plane_instructions.setAttribute('look-at','#camera');
       plane_instructions.setAttribute('rotation','0 90 0');
       plane_instructions.setAttribute('position',(3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
-      plane_instructions.setAttribute('material','src: #asset_msg;side: double;repeat: 1 1');
+     // console.log((3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
+      plane_instructions.setAttribute('material','src: #asset_msg;');
+     /* plane_instructions.setAttribute('material','src: #asset_msg;side: double;repeat: 1 1'); */
+      scene.appendChild(plane_instructions); 
+      
 
-      scene.appendChild(plane_instructions);
+      //reload
+      var reload = document.createElement("a-box");
+      reload.setAttribute('on-click','');
+      reload.setAttribute('height',0.3);
+      reload.setAttribute('width',0.3);
+      reload.setAttribute('look-at','#camera');
+      reload.setAttribute('rotation','0 90 0');
+      reload.setAttribute('position','-25.5 2 -19');
+  //    console.log((3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
+      reload.setAttribute('material','src: #asset_msg1;');
+     /* plane_instructions.setAttribute('material','src: #asset_msg;side: double;repeat: 1 1'); */
+
+      scene.appendChild(reload);
 
       // Set final portal position
       var free1=maze_height-1,free2=maze_width-1;
@@ -221,16 +237,17 @@
         }
       }
 
-      // Print blue portal
+      // door
       var box_price = document.createElement("a-box");
           box_price.setAttribute('static-body','');
           box_price.setAttribute('src','#door');
           box_price.setAttribute('id','price');
-          box_price.setAttribute('height',3);
-          box_price.setAttribute('width',1.5);
+          box_price.setAttribute('height',2);
+          box_price.setAttribute('width',1);
        //   box_price.setAttribute('depth',1);
           box_price.setAttribute('rotation','0 0 0');
           box_price.setAttribute('position',(3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
+          console.log((3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
        //   box_price.setAttribute('color','#00f');
 
           scene.appendChild(box_price);
