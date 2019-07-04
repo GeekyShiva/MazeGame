@@ -10,6 +10,7 @@
     <script src="libs/lz-string.min.js"></script>
     
     <script src="src/common.js"></script>
+    <script src="src/reload.js"></script>
 
   </head>
   <body>
@@ -21,10 +22,11 @@
         <img src="assets/roof.jpg" id="asset_roof">
         <img src="assets/ground.jpg" id="asset_ground">
         <img src="assets/msg.jpg" id="asset_msg">
+        <img src="assets/msg1.png" id="asset_msg1">
       </a-assets>
     <a-entity sound="src: url(assets/backgroundnoise.mp3); autoplay: true; loop:true; distanceModel:linear"></a-entity>
       <a-entity static-body
-                sound="src: url(src/bat.mp3); on: collide; volume:0.2; refDistance: 0.5"
+                sound="src: url(src/bat.mp3); on: collide; volume:0.1;"
                 velocity="0 0 0" 
                 rotation="0 0 0" 
                 position="0 1.6 -2" 
@@ -32,12 +34,28 @@
                 camera="" 
                 kinematic-body 
                 universal-controls>
+                <a-entity cursor="fuse: true; fuseTimeout: 500"
+                  position="0 0 -1"
+                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                  material="color:green; shader: flat">
+                </a-entity>
+              <!--  <a-box id="boxId" position="0 0.5 -3" rotation="0 45 0" color="blue"></a-box>   -->
                   <a-entity text="text: Time;size:.03;height:0.001" material="color:#f00" position="-0.1 -0.7 -1" id="board"></a-entity>
                   <a-entity text="text: ;size:.1;height:0.001" material="color:#78ff0f" position="-0.3 0 -1" id="winner"></a-entity>
                 </a-entity>
-
+               
     </a-scene>
+ 
+
     <script>
+
+AFRAME.registerComponent('on-click', {
+init: function () {
+this.el.addEventListener('click', function (evt) {
+  location.reload();
+});
+}
+});
 
     var maze;
 
@@ -52,6 +70,7 @@
         winner.setAttribute('text', attr_text);
       }
     });
+
 
     var seconds = 0;
     var counter;
