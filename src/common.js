@@ -205,12 +205,13 @@
       // Print instructions
       var plane_instructions = document.createElement("a-box");
       plane_instructions.setAttribute('height',1.5);
-      plane_instructions.setAttribute('width',2.7);
+      plane_instructions.setAttribute('width',2.5);
       plane_instructions.setAttribute('look-at','#camera');
       plane_instructions.setAttribute('rotation','0 90 0');
+      plane_instructions.setAttribute('id','instruction');
+      plane_instructions.setAttribute('on-gaze','');
       plane_instructions.setAttribute('position',(3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
       plane_instructions.setAttribute('material','src: #asset_instruction;');
-
       scene.appendChild(plane_instructions); 
       
 
@@ -221,7 +222,7 @@
       reload.setAttribute('width',0.3);
       reload.setAttribute('look-at','#camera');
       reload.setAttribute('rotation','0 90 0');
-      reload.setAttribute('position','-25.5 2 -19');
+      reload.setAttribute('position','-25.5 2.2 -19.5');
       reload.setAttribute('material','src: #asset_reload;');
 
       scene.appendChild(reload);
