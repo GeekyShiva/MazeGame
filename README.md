@@ -31,10 +31,10 @@
 
 # GamePlay Snip
 
-<img alt="Supercraft" target="_blank" src="https://user-images.githubusercontent.com/674727/41085457-f5429566-69eb-11e8-92e5-3210e4c6c4a0.gif" height="190" width="32%">
+<img alt="End" target="_blank" src="README_Content/Gifs/end8sec.gif" height="190" width="32%">
 
 
-<img alt="A-Painter" target="_blank" src="https://cloud.githubusercontent.com/assets/674727/24531388/acfc3dda-156d-11e7-8563-5bd75252f70f.gif" height="190" width="32%">
+<img alt="Start" target="_blank" src="README_Content/Gifs/start10sec.gif" height="190" width="32%">
 
 
 
