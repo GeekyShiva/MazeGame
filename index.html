@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MazeGame</title>
+    <meta name="description" content="MazeGame - Fun Trivia Maze Game built on A-frame & Three.js">
+    <!--Libraries & external scripts Import-->
+    <script src="libs/aframe.js"></script>    <!--Aframe.js(v0.3.0) Library-->
+    <script src="libs/aframe-extras.js"></script>    <!--Aframe-extras.js(v2.6.1) Library-->
+    <script src="libs/aframe-text-component.min.js"></script>   <!--Aframe library used for rendering text-->
+    <script src="libs/lz-string.min.js"></script>   <!--LZ-based compression algorithm for JavaScript-->
+    <script src="libs/aframe-bmfont-text-component.js"></script>    <!--Aframe library used for rendering bitmap font text-->
+    <script src="src/common.js"></script>    <!--JavaScript for the game-->
+    <script src="https://cdn.jsdelivr.net/npm/aframe-glow@1.0.1/dist/aframe-glow-component.js"></script>
+
+  </head>
+
+  <body>
+    <!--Anchored VR Design-->
+    <!--Aframe scene starts here-->
+    <a-scene fog="type: linear; color: #AAB; near: 0; far:10;" physics id="scene" >
+      <!--Importing Assets-->
+      <!--Diegetic UI Elements-->
+      <a-assets>
+        <img src="assets/door.png" id="door">
+        <img src="assets/wall.jpg" id="asset_wall">
+        <img src="assets/roof.jpg" id="asset_roof">
+        <img src="assets/ground.jpg" id="asset_ground">
+        <img src="assets/instruction.jpg" id="asset_instruction">
+        <img src="assets/reload.png" id="asset_reload">
+      </a-assets>
+      <!--Entity to add background noise-->
+      <a-entity sound="src: url(assets/audio/backgroundnoise.mp3); autoplay: true; loop:true; distanceModel:linear">
+      </a-entity>
+      <!--Camera/Player body Entity-->
+      <a-entity static-body
+                sound="src: url(assets/audio/bat.mp3); on: collide; volume:0.05;"  
+                velocity="0 0 0" 
+                rotation="0 0 0" 
+                position="0 1.6 -2" 
+                id="camera" 
+                camera="" 
+                kinematic-body 
+                universal-controls>
+                <!--Entity to create a crosshair-->
+                <!--Crosshair is a Non-Diegetic UI Element-->
+                <a-entity cursor="fuse: true; fuseTimeout: 500"
+                  position="0 0 -1"
+                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                  material="color:#20639B; shader: flat">
+                </a-entity>
+                <!--Entity for Timer-->
+                <!--Timer is a Non-Diegetic UI Element-->
+                  <a-entity text="text: Time;fnt:assets/SourceCodePro.fnt;size:.09;height:0.001" material="color:#ff3232" position="-0.1 -0.7 -1" id="board"></a-entity>
+                  <!--Entity for Winner text-->
+                  <a-entity text="text: ;size:0.1;height:0.001" material="color:#f4ff61" position="-0.3 0 -1" id="winner"></a-entity>
+                </a-entity>               
+    </a-scene>
+    <!--Aframe scene ends here-->
+
+    <!--JavaScript Starts here-->
+    
+    <script>
+//  Reload Game Component
+AFRAME.registerComponent('on-click', {
+init: function () {
+this.el.addEventListener('click', function (evt) {
+  location.reload();
+});
+}
+});
+
+// Instructions Glow Component
+AFRAME.registerComponent('on-gaze', {
+init: function () {
+  this.el.addEventListener('mouseenter', function (evt) {
+  var glow = document.getElementById("instruction");
+  glow.setAttribute('glow','side: front; scale: 2; color: #e8cd00; c: 0.1; p: 3.5;');
+});
+this.el.addEventListener('mouseleave', function (evt) {
+  var glow = document.getElementById("instruction");
+  glow.setAttribute('glow','enabled:false');
+});
+}
+});
+
+
+    /* Maze formation */
+    
+    var maze;
+
+    // Player body collision with the Door & Winner Text display
+    var cam = document.getElementById('camera');
+    cam.addEventListener('collide', function (e) {
+      if(e.detail.body.el.getAttribute('id')=='price'){
+        clearInterval(counter);
+
+        var winner = document.getElementById('winner');
+        var attr_text = winner.getAttribute('text');
+        attr_text.text = "Hurray! You Win!";
+        winner.setAttribute('text', attr_text);
+      }
+    });
+
+
+    var seconds = 0;
+    var counter;
+    
+    // Creating a maze array
+    function init(width,height){
+      clearInterval(counter);
+      maze = new Array(parseInt(height));
+      for (var i = 0; i < maze.length; i++){
+        maze[i] = [].repeat(0, width);
+      }
+
+      // Randomized path generation 
+      buildPath(maze,[0,0]);
+      if(typeof QueryString.maze == 'undefined'){
+        window.location.hash += '&maze='+LZString.compressToBase64(JSON.stringify(maze));
+      }else{
+        maze = JSON.parse(LZString.decompressFromBase64(QueryString.maze))
+      }
+      paintMaze(maze);
+
+      // Timer Function
+
+      seconds = 0;
+      counter = setInterval(function(){
+        var board = document.getElementById('board');
+        var attr_text = board.getAttribute('text');
+        attr_text.text = seconds++;
+        var sec = attr_text;
+        board.setAttribute('text',attr_text);
+      },1000);
+    }
+
+    // Maze Width & Height
+    
+    var width = QueryString.width;
+    var height = QueryString.height;
+    if(typeof width == 'undefined'){
+      width = 18;
+    }
+    if(typeof height == 'undefined'){
+      height = 14;
+    }
+    init(width,height);
+
+
+    </script>
+   <!--JavaScript ends here-->
+  </body>
+</html>
