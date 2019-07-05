@@ -147,6 +147,7 @@ All other components are working fine as of today.
 
 # Code Quality Report
 
+![Quality Report](README_Content/Quality Report.JPG)
 
 # Credits 
 
