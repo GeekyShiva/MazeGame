@@ -1,6 +1,5 @@
 
-    /* Aux functions */
-
+    /* Aux functions- Maze sharing */
 
     Array.prototype.repeat= function(what, L){
      while(L) this[--L]= what;
@@ -41,6 +40,8 @@
       return str.replace()
     }
 
+    /* Shuffle */
+
     function shuffle(a) {
       var j, x, i;
       for (i = a.length; i; i--) {
@@ -52,6 +53,7 @@
     }
 
     /* Maze functions */
+    /* Replication Single objects for maze */
 
     function buildPath(maze, pos){
       var neighbor = [];
@@ -125,7 +127,7 @@
         scene.remove(aboxes[i]);
       }
 
-      // Print gound
+      // Print ground
       var plane_ground = document.createElement("a-plane");
       plane_ground.setAttribute('static-body','');
       plane_ground.setAttribute('height',3*maze_height);
@@ -203,13 +205,12 @@
       // Print instructions
       var plane_instructions = document.createElement("a-box");
       plane_instructions.setAttribute('height',1.5);
-      plane_instructions.setAttribute('width',3);
+      plane_instructions.setAttribute('width',2.7);
       plane_instructions.setAttribute('look-at','#camera');
       plane_instructions.setAttribute('rotation','0 90 0');
       plane_instructions.setAttribute('position',(3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
-     // console.log((3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
-      plane_instructions.setAttribute('material','src: #asset_msg;');
-     /* plane_instructions.setAttribute('material','src: #asset_msg;side: double;repeat: 1 1'); */
+      plane_instructions.setAttribute('material','src: #asset_instruction;');
+
       scene.appendChild(plane_instructions); 
       
 
@@ -221,9 +222,7 @@
       reload.setAttribute('look-at','#camera');
       reload.setAttribute('rotation','0 90 0');
       reload.setAttribute('position','-25.5 2 -19');
-  //    console.log((3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
-      reload.setAttribute('material','src: #asset_msg1;');
-     /* plane_instructions.setAttribute('material','src: #asset_msg;side: double;repeat: 1 1'); */
+      reload.setAttribute('material','src: #asset_reload;');
 
       scene.appendChild(reload);
 
@@ -244,11 +243,9 @@
           box_price.setAttribute('id','price');
           box_price.setAttribute('height',2);
           box_price.setAttribute('width',1);
-       //   box_price.setAttribute('depth',1);
+          box_price.setAttribute('depth',1);
           box_price.setAttribute('rotation','0 0 0');
           box_price.setAttribute('position',(3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
-          console.log((3*(free2-(maze_width-1)*.5))+' 1 '+(3*(free1-(maze_height-1)*.5)));
-       //   box_price.setAttribute('color','#00f');
 
           scene.appendChild(box_price);
 
