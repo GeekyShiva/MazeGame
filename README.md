@@ -20,8 +20,8 @@
 
 # Developer :
 
-| [<img src="https://avatars0.githubusercontent.com/u/14253823?s=400&v=4" width="100px;"/><br/><sub>Shivank Shekhar](https://github.com/GeekyShiva)<br/>|
-| :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/14253823?s=400&v=4" width="100px;"/><br/><sub>Shivank Shekhar](https://github.com/GeekyShiva)<br/>| [<img src="https://avatars1.githubusercontent.com/u/25361949?s=400&v=4" width="100px;"/><br/><sub>Shubhendra Singh Chauhan](https://github.com/withshubh)<br/>|
+| :---: | :---: |
 
 # StoryBoard
 
